@@ -10,6 +10,14 @@
       rel="stylesheet"
     />
     <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <link
       href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"
       rel="stylesheet"
     />
@@ -75,7 +83,6 @@
             <thead class="bg-gray-700 text-white">
               <tr>
                 <th class="px-4 py-2">STT</th>
-                <th class="px-4 py-2">ID</th>
                 <th class="px-4 py-2">Tên</th>
                 <th class="px-4 py-2">Loại</th>
                 <th class="px-4 py-2">Giá</th>
@@ -105,6 +112,7 @@
           <form>
             <div class="mb-3">
               <input
+                id="productName"
                 type="text"
                 class="w-full border border-gray-300 rounded px-3 py-2"
                 placeholder="Tên điện thoại"
@@ -112,6 +120,7 @@
             </div>
             <div class="mb-3">
               <input
+                id="productPrice"
                 type="text"
                 class="w-full border border-gray-300 rounded px-3 py-2"
                 placeholder="Giá"
@@ -119,6 +128,7 @@
             </div>
             <div class="mb-3">
               <input
+                id="screenSP"
                 type="text"
                 class="w-full border border-gray-300 rounded px-3 py-2"
                 placeholder="Màn hình"
@@ -126,6 +136,7 @@
             </div>
             <div class="mb-3">
               <input
+                id="frtCamera"
                 type="text"
                 class="w-full border border-gray-300 rounded px-3 py-2"
                 placeholder="Camera trước"
@@ -133,6 +144,7 @@
             </div>
             <div class="mb-3">
               <input
+                id="bckCamera"
                 type="text"
                 class="w-full border border-gray-300 rounded px-3 py-2"
                 placeholder="Camera sau"
@@ -140,6 +152,7 @@
             </div>
             <div class="mb-3">
               <input
+                id="productImg"
                 type="text"
                 class="w-full border border-gray-300 rounded px-3 py-2"
                 placeholder="Ảnh URL"
@@ -147,6 +160,7 @@
             </div>
             <div class="mb-3">
               <textarea
+                id="productDesc"
                 class="w-full border border-gray-300 rounded px-3 py-2"
                 placeholder="Mô tả"
               ></textarea>
@@ -171,14 +185,14 @@
               </button>
               <button
                 id="btnCapNhat"
-                type="submit"
+                type="button"
                 class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
               >
                 Update
               </button>
               <button
                 id="btnThemSP"
-                type="submit"
+                type="button"
                 class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
               >
                 Add
@@ -188,6 +202,13 @@
         </div>
       </div>
     </div>
+    <script type="module" src="../controllers/main.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.9.0/axios.min.js"
+      integrity="sha512-FPlUpimug7gt7Hn7swE8N2pHw/+oQMq/+R/hH/2hZ43VOQ+Kjh25rQzuLyPz7aUWKlRpI7wXbY6+U3oFPGjPOA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
   </body>
 </html>
