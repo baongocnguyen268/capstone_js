@@ -54,8 +54,15 @@
         <nav class="text-sm text-gray-500 mb-4">
           Dashboard / <span class="text-orange-500">Phone List</span>
         </nav>
-        <div class="flex justify-between items-center mb-4">
-          <h1 class="text-2xl font-bold">Danh Sách Điện Thoại</h1>
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center gap-4">
+            <h1 class="text-2xl font-bold">Danh Sách Điện Thoại</h1>
+            <select id="sortPrice" class="border px-3 py-1 rounded text-sm">
+              <option value="">-- Sắp xếp theo giá --</option>
+              <option value="asc">Giá tăng dần</option>
+              <option value="desc">Giá giảm dần</option>
+            </select>
+          </div>
           <button
             id="btnThem"
             data-modal-target="addPhoneModal"
@@ -108,7 +115,9 @@
         class="relative w-full max-w-md m-auto mt-20 bg-white rounded-lg shadow-lg"
       >
         <div class="p-6">
-          <h3 class="text-xl font-semibold mb-4">Thêm Điện Thoại Mới</h3>
+          <h3 class="modal-title text-xl font-semibold mb-4">
+            Thêm Điện Thoại Mới
+          </h3>
           <form>
             <div class="mb-3">
               <input
@@ -117,6 +126,10 @@
                 class="w-full border border-gray-300 rounded px-3 py-2"
                 placeholder="Tên điện thoại"
               />
+              <div
+                id="invalidName"
+                class="invalid-feedback text-red-500 text-sm hidden"
+              ></div>
             </div>
             <div class="mb-3">
               <input
@@ -125,6 +138,10 @@
                 class="w-full border border-gray-300 rounded px-3 py-2"
                 placeholder="Giá"
               />
+              <div
+                id="invalidPrice"
+                class="invalid-feedback text-red-500 text-sm hidden"
+              ></div>
             </div>
             <div class="mb-3">
               <input
@@ -133,6 +150,10 @@
                 class="w-full border border-gray-300 rounded px-3 py-2"
                 placeholder="Màn hình"
               />
+              <div
+                id="invalidScreen"
+                class="invalid-feedback text-red-500 text-sm hidden"
+              ></div>
             </div>
             <div class="mb-3">
               <input
@@ -141,6 +162,10 @@
                 class="w-full border border-gray-300 rounded px-3 py-2"
                 placeholder="Camera trước"
               />
+              <div
+                id="invalidFCamera"
+                class="invalid-feedback text-red-500 text-sm hidden"
+              ></div>
             </div>
             <div class="mb-3">
               <input
@@ -149,6 +174,10 @@
                 class="w-full border border-gray-300 rounded px-3 py-2"
                 placeholder="Camera sau"
               />
+              <div
+                id="invalidBCamera"
+                class="invalid-feedback text-red-500 text-sm hidden"
+              ></div>
             </div>
             <div class="mb-3">
               <input
@@ -164,6 +193,10 @@
                 class="w-full border border-gray-300 rounded px-3 py-2"
                 placeholder="Mô tả"
               ></textarea>
+              <div
+                id="invalidFDesc"
+                class="invalid-feedback text-red-500 text-sm hidden"
+              ></div>
             </div>
             <div class="mb-3">
               <select
@@ -174,6 +207,10 @@
                 <option value="iPhone">iPhone</option>
                 <option value="Samsung">Samsung</option>
               </select>
+              <div
+                id="invalidType"
+                class="invalid-feedback text-red-500 text-sm hidden"
+              ></div>
             </div>
             <div class="flex justify-end gap-2">
               <button

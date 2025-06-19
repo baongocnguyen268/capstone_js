@@ -1,9 +1,13 @@
 import Products from "../models/products.js";
 import ProductServices from "../services/product-services.js";
+import Validation from "../models/validation.js";
 
 const services = new ProductServices();
+const validation = new Validation();
 
-const getEle = (id) => document.getElementById(id);
+export const getEle = (id) => {
+  return document.getElementById(id);
+};
 const getProductList = () => {
   const promise = services.getProductListApi();
   promise
@@ -25,8 +29,8 @@ const renderProductList = (data) => {
   <td>${products.type}</td>
   <td>${products.price}</td>
   <td>${products.screen}</td>
-  <td>${products.backCameraCamera}</td>
   <td>${products.frontCamera}</td>
+  <td>${products.backCamera}</td>
   <td><img src="../../asset/image/${products.img}" width="80" /></td>
   <td>${products.desc}</td>
   <td class="flex justify-center gap-2">
@@ -51,6 +55,7 @@ const renderProductList = (data) => {
 getProductList();
 
 const getValue = () => {
+  let isValid = true;
   const name = getEle("productName").value;
   const price = getEle("productPrice").value;
   const screen = getEle("screenSP").value;
@@ -59,6 +64,45 @@ const getValue = () => {
   const img = getEle("productImg").value;
   const desc = getEle("productDesc").value;
   const type = getEle("productType").value;
+  isValid =
+    validation.checkEmpty(
+      name,
+      "invalidName",
+      "(*)Vui lòng nhập tên sản phẩm"
+    ) && isValid;
+  isValid =
+    validation.checkEmpty(price, "invalidPrice", "(*)Vui lòng nhập giá") &&
+    validation.checkIsNumber(
+      price,
+      "invalidPrice",
+      "(*) Giá chỉ được chứa số"
+    ) &&
+    isValid;
+  isValid =
+    validation.checkEmpty(
+      screen,
+      "invalidScreen",
+      "(*)Vui lòng nhập màn hình"
+    ) && isValid;
+  isValid =
+    validation.checkEmpty(
+      frontCamera,
+      "invalidFCamera",
+      "(*)Vui lòng nhập camera trước"
+    ) && isValid;
+  isValid =
+    validation.checkEmpty(
+      backCamera,
+      "invalidBCamera",
+      "(*)Vui lòng nhập camera sau"
+    ) && isValid;
+  isValid =
+    validation.checkSelectOption(
+      "productType",
+      "invalidType",
+      "(*) Vui lòng chọn loại"
+    ) && isValid;
+  if (!isValid) return null;
   const product = new Products(
     "",
     name,
@@ -75,6 +119,7 @@ const getValue = () => {
 
 const btnThemSP = () => {
   const product = getValue();
+  if (!product) return;
   const promise = services.addProductApi(product);
   promise
     .then((result) => {
@@ -88,16 +133,75 @@ const btnThemSP = () => {
     });
 };
 window.addEventListener("DOMContentLoaded", () => {
-  const btn = document.getElementById("btnThemSP");
-  if (btn) {
-    btn.addEventListener("click", btnThemSP);
-  }
+  const addBtn = document.getElementById("btnThemSP");
+  const updateBtn = document.getElementById("btnCapNhat");
+
+  if (addBtn) addBtn.addEventListener("click", btnThemSP);
+  if (updateBtn) updateBtn.addEventListener("click", btnCapNhat);
 });
 
 getEle("btnThem").onclick = function () {
-  getEle("btnCapNhat").style.display = "none"; 
-  getEle("btnThemSP").style.display = "block"; 
-  resetForm();
+  document.querySelector("#addPhoneModal form").reset();
+  const modalTitle = document.querySelector(".modal-title");
+  if (modalTitle) {
+    modalTitle.innerText = "Thêm Điện Thoại Mới";
+  }
+  getEle("btnCapNhat").style.display = "none";
+  getEle("btnThemSP").style.display = "block";
+  [
+    "invalidName",
+    "invalidPrice",
+    "invalidScreen",
+    "invalidFCamera",
+    "invalidBCamera",
+    "invalidType",
+  ].forEach((id) => {
+    getEle(id).innerText = "";
+    getEle(id).style.display = "none";
+  });
+};
+let currentEditId = -1;
+const editProduct = (id) => {
+  currentEditId = id;
+  const modal = document.getElementById("addPhoneModal");
+  if (modal) {
+    modal.classList.remove("hidden");
+  }
+  getEle("btnThemSP").style.display = "none";
+  getEle("btnCapNhat").style.display = "block";
+  document.getElementsByClassName("modal-title")[0].innerHTML = "Edit Product";
+  const promise = services.getProductById(id);
+  promise
+    .then((result) => {
+      const product = result.data;
+      getEle("productName").value = product.name;
+      getEle("productPrice").value = product.price;
+      getEle("screenSP").value = product.screen;
+      getEle("frtCamera").value = product.frontCamera;
+      getEle("bckCamera").value = product.backCamera;
+      getEle("productImg").value = product.img;
+      getEle("productDesc").value = product.desc;
+      getEle("productType").value = product.type;
+      getProductList();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+window.editProduct = editProduct;
+const btnCapNhat = () => {
+  const product = getValue();
+  product.id = currentEditId;
+  const promise = services.updateProductApi(product);
+  promise
+    .then((result) => {
+      alert(`Update product ${result.data.name} success!`);
+      document.getElementById("addPhoneModal").classList.add("hidden");
+      getProductList();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };
 
 const deleteProduct = (id) => {
