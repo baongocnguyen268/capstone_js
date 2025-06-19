@@ -1,9 +1,11 @@
 import Products from "../models/products.js";
 import ProductServices from "../services/product-services.js";
 import Validation from "../models/validation.js";
+import ProductList from "../models/products-list.js";
 
 const services = new ProductServices();
 const validation = new Validation();
+const productList = new ProductList(services);
 
 export const getEle = (id) => {
   return document.getElementById(id);
@@ -217,3 +219,21 @@ const deleteProduct = (id) => {
     });
 };
 window.deleteProduct = deleteProduct;
+
+productList.getList();
+document.getElementById("sortPrice").addEventListener("change", (e) => {
+  const order = e.target.value;
+  productList.sortByPrice(order);
+});
+
+getEle("selLoai").addEventListener("change", () => {
+  const type = getEle("selLoai").value;
+  const filtered = productList.filterProduct(type);
+  productList.renderProductList(filtered);
+});
+
+getEle("keyword").addEventListener("keyup", () => {
+  const keyword = getEle("keyword").value;
+  const findProducts = productList.searchProducts(keyword);
+  productList.renderProductList(findProducts);
+})
