@@ -22,8 +22,8 @@ checkEmpty(value, idNoti, mess) {
     return false;
   }
   checkIsNumber(value, idNoti, mess) {
-  const pattern = /^[0-9]+$/;
-  if (!pattern.test(value)) {
+
+  if (parseInt(value, 10) < 1000000) {
     getEle(idNoti).innerHTML = mess;
     getEle(idNoti).style.display = "block";
     return false;
