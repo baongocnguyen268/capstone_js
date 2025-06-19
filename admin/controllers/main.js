@@ -22,16 +22,19 @@ const renderProductList = (data) => {
 <tr>
   <td>${i + 1}</td>
   <td>${products.name}</td>
+  <td>${products.type}</td>
   <td>${products.price}</td>
   <td>${products.screen}</td>
-  <td>${products.backCamera}</td>
+  <td>${products.backCameraCamera}</td>
   <td>${products.frontCamera}</td>
-  <td>
-   <img src="../../asset/image/${products.img}" width="80" />
-  </td>
+  <td><img src="../../asset/image/${products.img}" width="80" /></td>
   <td>${products.desc}</td>
-  <td>${products.type}</td>
-  <td>
+  <td class="flex justify-center gap-2">
+    <button 
+      onclick="editProduct('${products.id}')"
+      class="inline-flex items-center gap-1 text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-400 rounded px-3 py-1.5 transition duration-150 ease-in-out">
+      <i class="fa-solid fa-pen-to-square"></i> Edit
+    </button>
     <button 
       onclick="deleteProduct('${products.id}')"
       class="inline-flex items-center gap-1 text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-400 rounded px-3 py-1.5 transition duration-150 ease-in-out">
@@ -39,6 +42,7 @@ const renderProductList = (data) => {
     </button>
   </td>
 </tr>
+
   `;
   }
   getEle("tbodyProducts").innerHTML = contentHTML;
@@ -89,6 +93,12 @@ window.addEventListener("DOMContentLoaded", () => {
     btn.addEventListener("click", btnThemSP);
   }
 });
+
+getEle("btnThem").onclick = function () {
+  getEle("btnCapNhat").style.display = "none"; 
+  getEle("btnThemSP").style.display = "block"; 
+  resetForm();
+};
 
 const deleteProduct = (id) => {
   const promise = services.deleteProductApi(id);
