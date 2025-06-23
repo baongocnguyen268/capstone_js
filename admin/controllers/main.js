@@ -77,7 +77,7 @@ const getValue = () => {
     validation.checkIsNumber(
       price,
       "invalidPrice",
-      "(*) Giá chỉ được chứa số"
+      "(*) Nhập giá hơn 1.000.000"
     ) &&
     isValid;
   isValid =
