@@ -1,9 +1,11 @@
 import Products from "../models/products.js";
 import ProductServices from "../services/product-services.js";
 import Validation from "../models/validation.js";
+import ProductList from "../models/products-list.js";
 
 const services = new ProductServices();
 const validation = new Validation();
+const productList = new ProductList(services);
 
 export const getEle = (id) => {
   return document.getElementById(id);
@@ -12,8 +14,7 @@ const getProductList = () => {
   const promise = services.getProductListApi();
   promise
     .then((result) => {
-      globalProductList = result.data; 
-      applyFilters(); ;
+      renderProductList(result.data);
     })
     .catch((error) => {
       console.log(error);
@@ -65,44 +66,44 @@ const getValue = () => {
   const img = getEle("productImg").value;
   const desc = getEle("productDesc").value;
   const type = getEle("productType").value;
-
   isValid =
     validation.checkEmpty(
       name,
       "invalidName",
       "(*)Vui lòng nhập tên sản phẩm"
-    );
+    ) && isValid;
   isValid =
     validation.checkEmpty(price, "invalidPrice", "(*)Vui lòng nhập giá") &&
     validation.checkIsNumber(
       price,
       "invalidPrice",
-      "(*) Giá chỉ được hơn 1.000.000Đ, Vui lòng nhập lại"
-    );
+      "(*) Giá chỉ được chứa số"
+    ) &&
+    isValid;
   isValid =
     validation.checkEmpty(
       screen,
       "invalidScreen",
       "(*)Vui lòng nhập màn hình"
-    );
+    ) && isValid;
   isValid =
     validation.checkEmpty(
       frontCamera,
       "invalidFCamera",
       "(*)Vui lòng nhập camera trước"
-    );
+    ) && isValid;
   isValid =
     validation.checkEmpty(
       backCamera,
       "invalidBCamera",
       "(*)Vui lòng nhập camera sau"
-    );
+    ) && isValid;
   isValid =
     validation.checkSelectOption(
       "productType",
       "invalidType",
       "(*) Vui lòng chọn loại"
-    ) ;
+    ) && isValid;
   if (!isValid) return null;
   const product = new Products(
     "",
@@ -170,7 +171,7 @@ const editProduct = (id) => {
   }
   getEle("btnThemSP").style.display = "none";
   getEle("btnCapNhat").style.display = "block";
-  document.getElementsByClassName("modal-title")[0].innerHTML = "Sửa Thông Tin Điện Thoại";
+  document.getElementsByClassName("modal-title")[0].innerHTML = "Edit Product";
   const promise = services.getProductById(id);
   promise
     .then((result) => {
@@ -219,53 +220,20 @@ const deleteProduct = (id) => {
 };
 window.deleteProduct = deleteProduct;
 
-
-let globalProductList = [];
-let currentFilterType = "all"; 
-let currentSortType = "all"; 
-let currentKeyword = "";
-
-getEle("sortPrice").addEventListener("change", function () {
-  currentSortType = this.value;
-  applyFilters();
+productList.getList();
+document.getElementById("sortPrice").addEventListener("change", (e) => {
+  const order = e.target.value;
+  productList.sortByPrice(order);
 });
 
-getEle("selLoai").addEventListener("change", function () {
-  currentFilterType = this.value.toLowerCase();
-  applyFilters();
+getEle("selLoai").addEventListener("change", () => {
+  const type = getEle("selLoai").value;
+  const filtered = productList.filterProduct(type);
+  productList.renderProductList(filtered);
 });
 
-getEle("keyword").addEventListener("input", function () {
-  currentKeyword = this.value.toLowerCase().trim();
-  applyFilters();
-});
-
-
-const applyFilters = () => {
-  let result = [...globalProductList];
-
-  // 1. Lọc theo hãng
-  if (currentFilterType !== "all") {
-    result = result.filter(p => p.type.toLowerCase() === currentFilterType);
-  }
-
-  // 2. Lọc theo từ khóa tìm kiếm (tên)
-  if (currentKeyword !== "") {
-    result = result.filter(p =>
-      p.name.toLowerCase().includes(currentKeyword)
-    );
-  }
-
-  // 3. Sắp xếp theo giá
-  if (currentSortType === "asc") {
-    result.sort((a, b) => Number(a.price) - Number(b.price));
-  } else if (currentSortType === "desc") {
-    result.sort((a, b) => Number(b.price) - Number(a.price));
-  }
-
-  // Render ra giao diện
-  renderProductList(result);
-};
-
-
-
+getEle("keyword").addEventListener("keyup", () => {
+  const keyword = getEle("keyword").value;
+  const findProducts = productList.searchProducts(keyword);
+  productList.renderProductList(findProducts);
+})
