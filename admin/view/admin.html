@@ -11,33 +11,39 @@
     integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
-</head>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gray-100 font-sans">
+    <div class="flex min-h-screen">
+      <aside class="w-64 bg-white shadow">
+        <div class="p-4 text-2xl font-bold text-gray-800 border-b">Phone</div>
+        <nav class="mt-4 space-y-2">
+          <a href="#" class="flex items-center px-4 py-2 hover:bg-gray-200">
+            <i class="bi bi-speedometer2 mr-2"></i> Dashboard
+          </a>
+          <a href="#" class="flex items-center px-4 py-2 hover:bg-gray-200">
+            <i class="bi bi-phone-fill mr-2"></i> Add Phone
+          </a>
+          <a href="#" class="flex items-center px-4 py-2 hover:bg-gray-200">
+            <i class="bi bi-list-ul mr-2"></i> Phone List
+          </a>
+        </nav>
+      </aside>
 
-<body class="bg-gray-100 font-sans">
-  <div class="flex min-h-screen">
-    <aside class="w-64 bg-white shadow">
-      <div class="p-4 text-2xl font-bold text-gray-800 border-b">Phone</div>
-      <nav class="mt-4 space-y-2">
-        <a href="#" class="flex items-center px-4 py-2 hover:bg-gray-200">
-          <i class="bi bi-speedometer2 mr-2"></i> Dashboard
-        </a>
-        <a href="#" class="flex items-center px-4 py-2 hover:bg-gray-200">
-          <i class="bi bi-phone-fill mr-2"></i> Add Phone
-        </a>
-        <a href="#" class="flex items-center px-4 py-2 hover:bg-gray-200">
-          <i class="bi bi-list-ul mr-2"></i> Phone List
-        </a>
-      </nav>
-    </aside>
-
-    <main class="flex-1 p-6">
-      <div class="flex justify-between items-center mb-6">
-        <input type="text" placeholder="Search..." class="border px-4 py-2 rounded w-1/2" />
-        <button class="bg-gray-800 text-white px-4 py-2 rounded">
-          Sign out
-        </button>
-      </div>
+      <main class="flex-1 p-6">
+        <div class="flex justify-between items-center mb-6">
+          <input
+            type="text"
+            placeholder="Search..."
+            class="border px-4 py-2 rounded w-1/2"
+          />
+          <button class="bg-gray-800 text-white px-4 py-2 rounded">
+            Sign out
+          </button>
+        </div>
 
         <nav class="text-sm text-gray-500 mb-4">
           Dashboard / <span class="text-orange-500">Phone List</span>
@@ -68,7 +74,7 @@
             placeholder="Find phone"
           />
           <select class="border px-4 py-2 rounded" id="selLoai">
-            <option selected>Chọn hãng</option>
+            <option value="all">Chọn hãng</option>
             <option>iPhone</option>
             <option>Samsung</option>
           </select>
