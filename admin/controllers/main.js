@@ -14,8 +14,7 @@ const getProductList = () => {
   const promise = services.getProductListApi();
   promise
     .then((result) => {
-      globalProductList = result.data; 
-      applyFilters(); ;
+      renderProductList(result.data);
     })
     .catch((error) => {
       console.log(error);
@@ -67,44 +66,44 @@ const getValue = () => {
   const img = getEle("productImg").value;
   const desc = getEle("productDesc").value;
   const type = getEle("productType").value;
-
   isValid =
     validation.checkEmpty(
       name,
       "invalidName",
       "(*)Vui lòng nhập tên sản phẩm"
-    );
+    ) && isValid;
   isValid =
     validation.checkEmpty(price, "invalidPrice", "(*)Vui lòng nhập giá") &&
     validation.checkIsNumber(
       price,
       "invalidPrice",
-      "(*) Giá chỉ được hơn 1.000.000Đ, Vui lòng nhập lại"
-    );
+      "(*) Giá chỉ được chứa số"
+    ) &&
+    isValid;
   isValid =
     validation.checkEmpty(
       screen,
       "invalidScreen",
       "(*)Vui lòng nhập màn hình"
-    );
+    ) && isValid;
   isValid =
     validation.checkEmpty(
       frontCamera,
       "invalidFCamera",
       "(*)Vui lòng nhập camera trước"
-    );
+    ) && isValid;
   isValid =
     validation.checkEmpty(
       backCamera,
       "invalidBCamera",
       "(*)Vui lòng nhập camera sau"
-    );
+    ) && isValid;
   isValid =
     validation.checkSelectOption(
       "productType",
       "invalidType",
       "(*) Vui lòng chọn loại"
-    ) ;
+    ) && isValid;
   if (!isValid) return null;
   const product = new Products(
     "",
@@ -172,7 +171,7 @@ const editProduct = (id) => {
   }
   getEle("btnThemSP").style.display = "none";
   getEle("btnCapNhat").style.display = "block";
-  document.getElementsByClassName("modal-title")[0].innerHTML = "Sửa Thông Tin Điện Thoại";
+  document.getElementsByClassName("modal-title")[0].innerHTML = "Edit Product";
   const promise = services.getProductById(id);
   promise
     .then((result) => {
