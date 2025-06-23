@@ -250,47 +250,8 @@
         <div class="text__content mb-8 text-center">
             <h2 class="text-3xl font-bold text-gray-900 text-dark">FEATURED</h2>
         </div>
-        <div class="max-w-screen-xl mx-auto">
-            <h2 class="text-3xl font-bold mb-8 text-gray-900 dark:text-white">Featured Products</h2>
+        <div id="tbodyCustomerProducts" class="max-w-screen-xl mx-auto ">
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                <!-- Product Item Start -->
-                <div
-                    class="w-full bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
-                    <a href="#">
-                        <img class="p-8 rounded-t-lg" src="https://img.tgdd.vn/imgt/old/f_webp,fit_outside,quality_75/https://cdn.tgdd.vn/Products/Images/42/329149/iphone-16-pro-max-sa-mac-thumb-1-200x200.jpg" alt="product image" />
-                    </a>
-                    <div class="px-5 pb-5">
-                        <a href="#">
-                            <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                                Apple Watch Series 7 GPS
-                            </h5>
-                        </a>
-                        <div class="flex items-center mt-2.5 mb-5">
-                            <!-- Stars -->
-                            <div class="flex items-center space-x-1 rtl:space-x-reverse">
-                                <svg class="w-4 h-4 text-yellow-300" ...></svg>
-                                <svg class="w-4 h-4 text-yellow-300" ...></svg>
-                                <svg class="w-4 h-4 text-yellow-300" ...></svg>
-                                <svg class="w-4 h-4 text-yellow-300" ...></svg>
-                                <svg class="w-4 h-4 text-gray-200 dark:text-gray-600" ...></svg>
-                            </div>
-                            <span
-                                class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-sm dark:bg-blue-200 dark:text-blue-800 ms-3">5.0</span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-3xl font-bold text-gray-900 dark:text-white">$599</span>
-                            <a href="#"
-                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                Add to cart
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Product Item End -->
-
-                <!-- Bạn có thể sao chép khối trên để tạo nhiều sản phẩm khác -->
-            </div>
         </div>
     </section>
 
@@ -400,6 +361,10 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+    <script type="module" src="./customer/controller/customer.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.9.0/axios.min.js"
+        integrity="sha512-FPlUpimug7gt7Hn7swE8N2pHw/+oQMq/+R/hH/2hZ43VOQ+Kjh25rQzuLyPz7aUWKlRpI7wXbY6+U3oFPGjPOA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 
 </html>
