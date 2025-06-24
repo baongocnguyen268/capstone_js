@@ -103,11 +103,16 @@
                     <span class="self-center text-2xl font-semibold whitespace-nowrap text-dark">Shop Phone</span>
                 </a>
                 <div class="flex items-center md:order-2 space-x-1 md:space-x-2 rtl:space-x-reverse">
-                    <a href="#"
-                        class="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">Login</a>
-                    <a href="#"
-                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Sign
-                        up</a>
+                    <a href="./admin/view/admin.html"
+                        class="text-gray-800 text-white bg-gray-600 hover:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">ADMIN</a>
+                    <a href="#" id="cartBtn"
+                        class="group relative flex items-center justify-center w-10 h-10 rounded-full transition duration-200 hover:bg-purple-100">
+                        <i
+                            class="fas fa-cart-shopping text-xl text-gray-700 group-hover:text-purple-700 transition"></i>
+                        <span id="cartBadge"
+                            class="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+                        <span class="sr-only">Giỏ hàng</span>
+                    </a>
                     <button data-collapse-toggle="mega-menu-icons" type="button"
                         class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                         aria-controls="mega-menu-icons" aria-expanded="false">
@@ -251,7 +256,6 @@
             <h2 class="text-3xl font-bold text-gray-900 text-dark">FEATURED</h2>
         </div>
         <div id="tbodyCustomerProducts" class="max-w-screen-xl mx-auto ">
-
         </div>
     </section>
 
@@ -358,9 +362,38 @@
             </div>
         </div>
     </footer>
+    <!-- Cart Modal -->
+    <div id="sideCartModal"
+        class="fixed top-0 right-0 h-full w-full max-w-sm bg-white shadow-lg z-[100] transform translate-x-full transition-transform duration-300 ease-in-out">
+        <!-- Modal Header -->
+        <div class="flex justify-between items-center p-4 border-b">
+            <h2 class="text-xl font-semibold">Giỏ hàng của bạn</h2>
+            <button id="closeSideCart" class="text-gray-500 hover:text-gray-800">
+                <i class="fas fa-times fa-lg"></i>
+            </button>
+        </div>
 
+        <!-- Cart Body -->
+        <div id="sideCartBody" class="p-4 overflow-y-auto" style="height: calc(100% - 140px);">
+            <!-- Cart items will be rendered here -->
+        </div>
 
+        <!-- Modal Footer -->
+        <div class="absolute bottom-0 left-0 right-0 p-4 border-t bg-white">
+            <div class="flex justify-between items-center mb-4">
+                <span class="text-lg font-semibold">Tổng cộng:</span>
+                <span id="sideCartTotal" class="text-lg font-bold text-purple-600">0₫</span>
+            </div>
+            <button class="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700">Thanh
+                toán</button>
+        </div>
+    </div>
+    <div id="sideCartOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-[99] hidden"></div>
+
+    <!-- Cdn tailwindcss -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
     <script type="module" src="./customer/controller/customer.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.9.0/axios.min.js"
         integrity="sha512-FPlUpimug7gt7Hn7swE8N2pHw/+oQMq/+R/hH/2hZ43VOQ+Kjh25rQzuLyPz7aUWKlRpI7wXbY6+U3oFPGjPOA=="
