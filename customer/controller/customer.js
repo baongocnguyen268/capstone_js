@@ -15,7 +15,8 @@ const getProductList = () => {
     const promise = services.getProductListApi();
     promise
         .then((result) => {
-            renderProductList(result.data);
+            productList = result.data;
+            renderProductList(productList);
         })
         .catch((error) => {
             console.log(error);
@@ -52,6 +53,17 @@ const renderProductList = (data) => {
             ${contentHTML}
         </div>
     `;
+
+    document.querySelectorAll('.add-to-cart').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const productId = e.currentTarget.dataset.productId;
+            const productToAdd = productList.find(p => p.id == productId);
+            if (productToAdd) {
+                cart.addItem(productToAdd);
+                updateCartBadge();
+            }
+        });
+    });
 };
 
 getProductList();
@@ -86,7 +98,7 @@ const renderCart = () => {
     cart.items.forEach(item => {
         const itemHTML = `
             <div class="flex items-center gap-4 mb-4 p-2 border-b">
-                <img src="${item.product.img}" alt="${item.product.name}" class="w-16 h-16 object-cover rounded">
+                 <img src="../../asset/image/${item.product.img}" alt="${item.product.name}" class="w-16 h-16 object-cover rounded">
                 <div class="flex-grow">
                     <h3 class="font-semibold text-sm">${item.product.name}</h3>
                     <p class="text-xs text-gray-600">${item.quantity} x ${Number(item.product.price).toLocaleString()}₫</p>
